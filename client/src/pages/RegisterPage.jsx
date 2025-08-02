@@ -1,4 +1,4 @@
-// client/src/pages/RegisterPage.jsx
+
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
@@ -42,14 +42,14 @@ function RegisterPage() {
   return (
     <div className="container card fade-in">
       {" "}
-      {/* Added `card` and `fade-in` for styling and animation */}
+      
       <h2>Register</h2>
       {error && <p className="error-message">{error}</p>}
       {success && <p className="success-message">{success}</p>}
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           {" "}
-          {/* Grouped label and input for better styling */}
+          
           <label htmlFor="name">Name:</label>
           <input
             type="text"
@@ -92,11 +92,11 @@ function RegisterPage() {
         <button type="submit" className="btn-primary">
           Register
         </button>{" "}
-        {/* Added class for button styling */}
+      
       </form>
       <p className="text-center mt-md">
         {" "}
-        {/* Used utility classes for spacing and alignment */}
+        
         Already have an account? <Link to="/login">Login here</Link>
       </p>
     </div>

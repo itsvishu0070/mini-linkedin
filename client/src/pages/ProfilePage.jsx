@@ -1,4 +1,4 @@
-// client/src/pages/ProfilePage.jsx
+
 import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import userService from "../api/userService";
@@ -8,7 +8,7 @@ import { useAuth } from "../context/AuthContext";
 
 function ProfilePage() {
   const { userId } = useParams();
-  const { user: currentUser } = useAuth(); // Get current logged-in user
+  const { user: currentUser } = useAuth(); 
   const [profile, setProfile] = useState(null);
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -38,13 +38,13 @@ function ProfilePage() {
     fetchProfileData();
   }, [userId]);
 
-  // Format join date nicely
+  
   const formatJoinDate = (dateString) => {
     const options = { year: "numeric", month: "long", day: "numeric" };
     return new Date(dateString).toLocaleDateString(undefined, options);
   };
 
-  // Determine if the currently viewed profile belongs to the logged-in user
+  
   const isCurrentUserProfile = currentUser && currentUser._id === userId;
 
   if (loading) {
@@ -63,15 +63,13 @@ function ProfilePage() {
     );
   }
 
-  // Fallback for profile picture if not set (This variable is now unused but kept commented for reference)
-  // const defaultAvatar = "https://via.placeholder.com/100?text=Avatar";
 
   return (
     <div className="container card fade-in">
       <div className="profile-header mb-md">
         <div className="profile-info-basic">
           {" "}
-          {/* Changed from profile-avatar-section as avatar is removed */}
+         
           <h2>{profile.name}'s Profile</h2>
           <p className="profile-email">{profile.email}</p>
         </div>
@@ -85,7 +83,7 @@ function ProfilePage() {
           </p>
           {isCurrentUserProfile && (
             <p className="current-user-tag mt-md">(This is your profile)</p>
-            // Optional: Add an "Edit Profile" button here if desired
+            
           )}
         </div>
       </div>

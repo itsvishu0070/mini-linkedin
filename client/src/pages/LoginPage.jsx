@@ -1,4 +1,4 @@
-// client/src/pages/LoginPage.jsx
+
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
@@ -36,14 +36,14 @@ function LoginPage() {
   return (
     <div className="container card fade-in">
       {" "}
-      {/* Added `card` and `fade-in` for styling and animation */}
+     
       <h2>Login</h2>
       {error && <p className="error-message">{error}</p>}
       {success && <p className="success-message">{success}</p>}
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           {" "}
-          {/* Grouped label and input for better styling */}
+         
           <label htmlFor="email">Email:</label>
           <input
             type="email"
@@ -55,7 +55,7 @@ function LoginPage() {
         </div>
         <div className="form-group">
           {" "}
-          {/* Grouped label and input for better styling */}
+       
           <label htmlFor="password">Password:</label>
           <input
             type="password"
@@ -68,11 +68,11 @@ function LoginPage() {
         <button type="submit" className="btn-primary">
           Login
         </button>{" "}
-        {/* Added class for button styling */}
+     
       </form>
       <p className="text-center mt-md">
         {" "}
-        {/* Used utility classes for spacing and alignment */}
+       
         Don't have an account? <Link to="/register">Register here</Link>
       </p>
     </div>

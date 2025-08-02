@@ -1,8 +1,8 @@
-// client/src/pages/HomePage.jsx
+
 import React, { useState, useEffect } from "react";
 import { useAuth } from "../context/AuthContext";
 import postService from "../api/postService";
-import PostCard from "../components/Post/PostCard"; // Assuming PostCard is here. Will style this next if needed.
+import PostCard from "../components/Post/PostCard"; 
 
 function HomePage() {
   const { user } = useAuth();
@@ -43,9 +43,9 @@ function HomePage() {
 
     try {
       const createdPost = await postService.createPost({ text: newPostText });
-      setPosts([createdPost, ...posts]); // Add new post to top of list
-      setNewPostText(""); // Clear input
-      setError(""); // Clear error
+      setPosts([createdPost, ...posts]);
+      setNewPostText(""); input
+      setError(""); 
     } catch (err) {
       console.error("Failed to create post:", err);
       setError(
@@ -64,7 +64,7 @@ function HomePage() {
       {user && (
         <div className="post-create-card card mb-md">
           {" "}
-          {/* New classes for card styling */}
+         
           <h3>Create New Post</h3>
           {error && <p className="error-message">{error}</p>}
           <form onSubmit={handleNewPostSubmit}>
@@ -75,7 +75,7 @@ function HomePage() {
               rows="4"
               maxLength="500"
               required
-              className="text-input" /* Added class for textarea */
+              className="text-input" 
             ></textarea>
             <button
               type="submit"

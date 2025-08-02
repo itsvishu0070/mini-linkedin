@@ -1,22 +1,22 @@
-// server/models/Post.js
+
 import mongoose from "mongoose";
 
 const PostSchema = new mongoose.Schema(
   {
     user: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "User", // Reference to the User model
+      ref: "User", 
       required: true,
     },
     text: {
       type: String,
       required: true,
-      maxlength: 500, // Limit post length
+      maxlength: 500, 
     },
 
   },
   {
-    timestamps: true, // Adds createdAt and updatedAt fields
+    timestamps: true, 
   }
 );
 

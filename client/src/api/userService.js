@@ -1,5 +1,5 @@
-// client/src/api/userService.js
-import axiosInstance from "./axiosInstance"; // Use the configured axiosInstance
+
+import axiosInstance from "./axiosInstance"; 
 
 const getUserProfile = async (userId) => {
   const response = await axiosInstance.get(`/users/${userId}`);

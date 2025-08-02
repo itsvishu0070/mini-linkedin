@@ -1,9 +1,9 @@
-// client/src/components/Post/PostCard.jsx
+
 import React from "react";
 import { Link } from "react-router-dom";
 
 function PostCard({ post }) {
-  // Format timestamp nicely
+ 
   const formatDate = (dateString) => {
     const options = {
       year: "numeric",
@@ -47,7 +47,7 @@ function PostCard({ post }) {
       <p style={{ margin: "0 0 10px", fontSize: "1.1em", lineHeight: "1.5" }}>
         {post.text}
       </p>
-      {/* Optional: Add like/comment buttons here */}
+   
     </div>
   );
 }

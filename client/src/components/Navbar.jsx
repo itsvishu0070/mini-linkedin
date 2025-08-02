@@ -1,4 +1,4 @@
-// client/src/components/Navbar.jsx
+
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
@@ -7,25 +7,25 @@ function Navbar() {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
 
-  // State to control mobile menu open/close
+ 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  // State to track if the screen is mobile-sized (for responsive inline styles)
+ 
   const [isMobileScreen, setIsMobileScreen] = useState(
     window.innerWidth <= 768
   );
 
-  // Close menu when navigating or on route change
+  
   useEffect(() => {
     setIsMenuOpen(false);
   }, [navigate]);
 
-  // Update isMobileScreen state on window resize
+ 
   useEffect(() => {
     const handleResize = () => {
       const newIsMobile = window.innerWidth <= 768;
       setIsMobileScreen(newIsMobile);
       if (!newIsMobile && isMenuOpen) {
-        // If resized to desktop and menu is open, close it
+        
         setIsMenuOpen(false);
       }
     };
@@ -34,7 +34,7 @@ function Navbar() {
     return () => {
       window.removeEventListener("resize", handleResize);
     };
-  }, [isMenuOpen]); // Depend on isMenuOpen to correctly close menu when resizing from mobile to desktop
+  }, [isMenuOpen]); 
 
   const handleLogout = () => {
     logout();
@@ -45,14 +45,14 @@ function Navbar() {
     setIsMenuOpen(!isMenuOpen);
   };
 
-  // --- Inline Styles for Navbar ---
+ 
   const navbarStyles = {
-    background: "#2c3e50", // var(--navbar-bg)
-    padding: isMobileScreen ? "1rem 1rem" : "15px 30px", // var(--spacing-sm) var(--spacing-lg)
+    background: "#2c3e50", 
+    padding: isMobileScreen ? "1rem 1rem" : "15px 30px", 
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
-    boxShadow: "0 4px 10px rgba(0,0,0,0.25)", // var(--shadow-navbar)
+    boxShadow: "0 4px 10px rgba(0,0,0,0.25)", 
     position: "sticky",
     top: 0,
     left: 0,
@@ -62,42 +62,42 @@ function Navbar() {
   };
 
   const brandStyles = {
-    color: "#ffffff", // var(--navbar-brand-color)
+    color: "#ffffff", 
     textDecoration: "none",
-    fontFamily: "'Poppins', sans-serif", // var(--font-family-heading)
+    fontFamily: "'Poppins', sans-serif", 
     fontSize: isMobileScreen ? "1.6rem" : "1.8rem",
     fontWeight: "700",
-    transition: "color 0.2s ease-out", // var(--transition-fast)
+    transition: "color 0.2s ease-out", 
     flexShrink: 0,
   };
 
-  // Styles for the navigation links container (navbar-links)
+  
   const linkContainerBaseStyles = {
     display: "flex",
     alignItems: "center",
-    transition: "all 0.3s ease-in-out", // var(--transition-medium)
-    position: isMobileScreen ? "absolute" : "static", // Positioning for mobile slide-down
-    top: "100%", // Below the navbar
+    transition: "all 0.3s ease-in-out", 
+    position: isMobileScreen ? "absolute" : "static",
+    top: "100%",
     left: 0,
     width: isMobileScreen ? "100%" : "auto",
-    background: isMobileScreen ? "#2c3e50" : "none", // var(--navbar-bg) for mobile menu
+    background: isMobileScreen ? "#2c3e50" : "none", 
     flexDirection: isMobileScreen ? "column" : "row",
-    boxShadow: isMobileScreen ? "0 5px 15px rgba(0,0,0,0.1)" : "none", // var(--shadow-md)
-    overflow: "hidden", // Hide overflowing content when closed
-    zIndex: 999, // Below hamburger button
+    boxShadow: isMobileScreen ? "0 5px 15px rgba(0,0,0,0.1)" : "none", 
+    overflow: "hidden", 
+    zIndex: 999, 
   };
 
   const linkContainerMobileOpenStyles = {
-    maxHeight: isMenuOpen ? "300px" : "0", // Control opening/closing
+    maxHeight: isMenuOpen ? "300px" : "0",
     opacity: isMenuOpen ? "1" : "0",
     visibility: isMenuOpen ? "visible" : "hidden",
-    padding: isMobileScreen && isMenuOpen ? "1rem 0" : "0", // Add padding only when open on mobile
-    borderBottomLeftRadius: isMobileScreen ? "8px" : "0", // Rounded corners for dropdown
+    padding: isMobileScreen && isMenuOpen ? "1rem 0" : "0", 
+    borderBottomLeftRadius: isMobileScreen ? "8px" : "0", 
     borderBottomRightRadius: isMobileScreen ? "8px" : "0",
   };
 
   const linkContainerDesktopStyles = {
-    gap: "1.5rem", // var(--spacing-md)
+    gap: "1.5rem", 
   };
 
   const linkContainerCombinedStyles = {
@@ -107,26 +107,25 @@ function Navbar() {
       : linkContainerDesktopStyles),
   };
 
-  // Styles for individual nav links
+
   const navLinkBaseStyles = {
-    color: "#ecf0f1", // var(--navbar-text)
+    color: "#ecf0f1", 
     textDecoration: "none",
     fontFamily: "'Inter', sans-serif",
     fontWeight: "500",
-    borderRadius: "8px", // var(--border-radius-sm)
-    transition: "all 0.2s ease-out", // var(--transition-fast)
+    borderRadius: "8px",
+    transition: "all 0.2s ease-out", 
     whiteSpace: "nowrap",
-    // Hover effects are trickier with pure inline, need JS for this.
-    // For simplicity, we'll keep it simple or rely on `:hover` from global CSS if possible (but trying to avoid)
+   
   };
 
   const navLinkResponsiveStyles = {
     fontSize: isMobileScreen ? "1rem" : "1.05rem",
-    padding: isMobileScreen ? "0.8rem 0.5rem" : "0.5rem 0.75rem", // var(--spacing-sm) var(--spacing-xs)
+    padding: isMobileScreen ? "0.8rem 0.5rem" : "0.5rem 0.75rem", 
     width: isMobileScreen ? "100%" : "auto",
     textAlign: "center",
     backgroundColor: isMobileScreen ? "rgba(255,255,255,0.05)" : "transparent",
-    borderBottom: isMobileScreen ? "1px solid rgba(255,255,255,0.05)" : "none", // Subtle separator
+    borderBottom: isMobileScreen ? "1px solid rgba(255,255,255,0.05)" : "none", 
   };
 
   const navLinkCombinedStyles = {
@@ -134,28 +133,27 @@ function Navbar() {
     ...navLinkResponsiveStyles,
   };
 
-  // Styles for Logout Button
+  
   const navButtonBaseStyles = {
-    ...navLinkCombinedStyles, // Inherit base link styles
-    background: "#dc3545", // var(--danger-color)
-    color: "white", // var(--text-light)
+    ...navLinkCombinedStyles, 
+    background: "#dc3545", 
+    color: "white",
     border: "none",
     cursor: "pointer",
     fontWeight: "600",
     minWidth: "120px",
-    boxShadow: "0 2px 4px rgba(220, 53, 69, 0.25)", // var(--shadow-sm)
-    transition: "all 0.3s ease-in-out", // var(--transition-medium)
-    marginLeft: isMobileScreen ? "0" : "1rem", // var(--spacing-sm) for desktop
-    // Hover effect needs to be set with onMouseOver/onMouseOut or by CSS.
+    boxShadow: "0 2px 4px rgba(220, 53, 69, 0.25)", 
+    transition: "all 0.3s ease-in-out", 
+    marginLeft: isMobileScreen ? "0" : "1rem", 
   };
 
-  // Styles for Hamburger Icon
+
   const hamburgerMenuStyles = {
-    display: isMobileScreen ? "block" : "none", // Show/hide based on screen size
+    display: isMobileScreen ? "block" : "none", 
     background: "none",
     border: "none",
     cursor: "pointer",
-    padding: "0.5rem", // var(--spacing-xs)
+    padding: "0.5rem", 
     position: "relative",
     zIndex: 1001,
   };
@@ -164,9 +162,9 @@ function Navbar() {
     display: "block",
     width: "25px",
     height: "3px",
-    backgroundColor: "#ecf0f1", // var(--navbar-text)
+    backgroundColor: "#ecf0f1", 
     margin: "5px 0",
-    transition: "all 0.2s ease-out", // var(--transition-fast)
+    transition: "all 0.2s ease-out", 
   };
 
   const getHamburgerLineTransform = (lineIndex) => {
@@ -177,7 +175,7 @@ function Navbar() {
       if (lineIndex === 3)
         return { transform: "translateY(-8px) rotate(-45deg)" };
     }
-    return {}; // No transform when menu is closed
+    return {}; 
   };
 
   return (
@@ -186,7 +184,7 @@ function Navbar() {
         Mini LinkedIn
       </Link>
 
-      {/* Hamburger Icon for Mobile */}
+     
       <button
         style={hamburgerMenuStyles}
         onClick={toggleMenu}
@@ -203,7 +201,7 @@ function Navbar() {
         ></span>
       </button>
 
-      {/* Navigation links container */}
+      
       <div style={linkContainerCombinedStyles}>
         {user ? (
           <>
@@ -227,8 +225,7 @@ function Navbar() {
                 ...navButtonBaseStyles,
                 ...(isMobileScreen
                   ? { marginBottom: "0", borderBottom: "none" }
-                  : {}), // Last child specific style
-                // Manual hover effects for button
+                  : {}), 
                 backgroundColor: "#dc3545",
               }}
               onMouseOver={(e) => (e.target.style.backgroundColor = "#bb2d3b")}

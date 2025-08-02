@@ -1,5 +1,5 @@
-// client/src/api/postService.js
-import axiosInstance from "./axiosInstance"; // Use the configured axiosInstance
+
+import axiosInstance from "./axiosInstance"; 
 
 const createPost = async (postData) => {
   const response = await axiosInstance.post("/posts", postData);
