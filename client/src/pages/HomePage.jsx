@@ -1,8 +1,8 @@
-
+// client/src/pages/HomePage.jsx
 import React, { useState, useEffect } from "react";
 import { useAuth } from "../context/AuthContext";
 import postService from "../api/postService";
-import PostCard from "../components/Post/PostCard"; 
+import PostCard from "../components/Post/PostCard";
 
 function HomePage() {
   const { user } = useAuth();
@@ -44,8 +44,8 @@ function HomePage() {
     try {
       const createdPost = await postService.createPost({ text: newPostText });
       setPosts([createdPost, ...posts]);
-      setNewPostText(""); input
-      setError(""); 
+      setNewPostText(""); // CORRECTED: Removed the extra 'input' keyword
+      setError("");
     } catch (err) {
       console.error("Failed to create post:", err);
       setError(
@@ -58,24 +58,22 @@ function HomePage() {
   };
 
   return (
-    <div className="container fade-in">
+    <div className="container card fade-in">
       <h2>Community Feed</h2>
 
       {user && (
         <div className="post-create-card card mb-md">
-          {" "}
-         
           <h3>Create New Post</h3>
           {error && <p className="error-message">{error}</p>}
           <form onSubmit={handleNewPostSubmit}>
             <textarea
+              className="text-input"
               value={newPostText}
               onChange={(e) => setNewPostText(e.target.value)}
               placeholder="What's on your mind?"
               rows="4"
               maxLength="500"
               required
-              className="text-input" 
             ></textarea>
             <button
               type="submit"
