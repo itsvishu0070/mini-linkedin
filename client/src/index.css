@@ -1,0 +1,650 @@
+/* client/src/index.css */
+
+/* --- Global Variables & Resets --- */
+:root {
+  /* Color Palette */
+  --primary-color: #4a90e2;
+  /* A modern blue */
+  --primary-dark: #357bd6;
+  --primary-light: #e0f0ff;
+  /* Very light blue for subtle accents */
+  --secondary-color: #6c757d;
+  /* Muted grey for secondary actions */
+  --accent-color: #28a745;
+  /* Green for success/positive actions */
+  --danger-color: #dc3545;
+  /* Red for errors/destructive actions */
+  /* Navbar specific colors moved to Navbar.jsx */
+
+  /* Backgrounds */
+  --background-body: linear-gradient(135deg, #f0f4f8, #d9e2ec, #c0d1e0);
+  /* Subtle gradient */
+  --background-card: #ffffff;
+  --background-field: #f7f9fc;
+  /* Off-white for input fields */
+
+  /* Text Colors */
+  --text-primary: #2c3e50;
+  /* Dark charcoal */
+  --text-secondary: #5a6270;
+  /* Muted dark grey */
+  --text-light: #ffffff;
+
+  /* Borders & Shadows */
+  --border-color-light: #e6ecf1;
+  /* Lighter border */
+  --border-color-focus: var(--primary-color);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 5px 15px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.15);
+  /* Navbar shadow moved to Navbar.jsx */
+  --background-animation-duration: 40s;
+    /* Slower animation */
+
+
+  /* Typography */
+  --font-family-body: 'Inter', 'Roboto', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  --font-family-heading: 'Poppins', 'Inter', sans-serif;
+  --font-size-base: 16px;
+
+  /* Spacing & Transitions */
+  --spacing-xs: 0.5rem;
+  /* 8px */
+  --spacing-sm: 1rem;
+  /* 16px */
+  --spacing-md: 1.5rem;
+  /* 24px */
+  --spacing-lg: 2rem;
+  /* 32px */
+  --spacing-xl: 3rem;
+  /* 48px */
+  --border-radius-sm: 8px;
+  --border-radius-md: 12px;
+  --transition-fast: 0.2s ease-out;
+  --transition-medium: 0.3s ease-in-out;
+}
+
+/* Base Styles & Resets */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: var(--font-size-base);
+  /* Base font size for rem units */
+}
+
+body {
+  font-family: var(--font-family-body);
+    background: var(--background-body);
+    background-size: 400% 400%;
+    /* Important for animation */
+    animation: gradientAnimation var(--background-animation-duration) ease infinite alternate;
+    /* Apply animation */
+    color: var(--text-secondary);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+/* --- NEW: Keyframes for Background Animation --- */
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* --- Global Container Styles --- */
+.container {
+  width: 100%;
+  max-width: 960px;
+  /* Keeping original max-width for content */
+  margin: var(--spacing-lg) auto;
+  /* More generous margin */
+  padding: var(--spacing-lg);
+  background-color: var(--background-card);
+  border-radius: var(--border-radius-md);
+  box-shadow: var(--shadow-md);
+  /* Stronger initial shadow */
+  transition: transform var(--transition-medium), box-shadow var(--transition-medium);
+  /* Add transform for subtle lift */
+  flex-grow: 1;
+  /* Allows container to expand */
+  position: relative;
+  /* For z-index if needed */
+  z-index: 1;
+}
+
+/* Add hover effect for desktop */
+@media (min-width: 769px) {
+
+  /* Changed from 768px to avoid conflict with max-width */
+  .container:hover {
+    box-shadow: var(--shadow-lg);
+    /* Slightly stronger shadow on hover */
+  }
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 768px) {
+  .container {
+    margin: var(--spacing-md) auto;
+    padding: var(--spacing-md);
+    border-radius: 0;
+    /* Full-width on smaller screens */
+    box-shadow: none;
+    /* No shadow on full-width mobile layout */
+  }
+}
+
+/* --- Typography --- */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-family-heading);
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-sm);
+  font-weight: 700;
+}
+
+h2 {
+  font-size: 2rem;
+  /* Larger heading */
+  padding-bottom: var(--spacing-xs);
+  margin-bottom: var(--spacing-lg);
+  position: relative;
+  text-align: center;
+}
+
+h2::after {
+  /* Stylish underline effect */
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  /* Shorter underline */
+  height: 3px;
+  background-color: var(--primary-color);
+  border-radius: 2px;
+}
+
+p {
+  margin-bottom: var(--spacing-sm);
+  line-height: 1.7;
+}
+
+/* --- Forms & Inputs --- */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  margin-top: var(--spacing-lg);
+}
+
+.form-group {
+  /* Added this for better input/label pairing */
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+label {
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-xs);
+  display: block;
+  font-size: 0.95rem;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+textarea {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  /* Slightly more padding */
+  border: 1px solid var(--border-color-light);
+  border-radius: var(--border-radius-sm);
+  font-size: 1rem;
+  color: var(--text-primary);
+  background-color: var(--background-field);
+  transition: all var(--transition-fast);
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+textarea:focus {
+  border-color: var(--border-color-focus);
+  box-shadow: 0 0 0 3px rgba(var(--primary-color), 0.25);
+  outline: none;
+  background-color: var(--background-card);
+}
+
+textarea {
+  min-height: 120px;
+  /* Taller textareas */
+}
+
+/* --- Buttons --- */
+/* Base button style (for btn-primary etc. to inherit from) */
+button {
+  color: var(--text-light);
+  /* Common text color for buttons */
+  border: none;
+  padding: 0.8rem 2rem;
+  /* More generous padding */
+  border-radius: var(--border-radius-sm);
+  cursor: pointer;
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  /* Slight letter spacing */
+  transition: all var(--transition-medium);
+  align-self: flex-start;
+  min-width: 160px;
+  box-shadow: var(--shadow-sm);
+  /* Subtle shadow */
+  position: relative;
+  overflow: hidden;
+}
+
+button::before {
+  /* Hover effect background */
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.15);
+  transition: all var(--transition-medium) ease;
+}
+
+button:hover::before {
+  left: 0;
+}
+
+button:hover {
+  transform: translateY(-3px);
+  /* More pronounced lift */
+  box-shadow: var(--shadow-md);
+  /* Stronger shadow on hover */
+}
+
+button:active {
+  transform: translateY(0);
+  box-shadow: var(--shadow-sm);
+}
+
+button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+  opacity: 0.7;
+}
+
+button:disabled::before {
+  left: -100%;
+  /* Disable hover effect when disabled */
+}
+
+/* Specific button styles */
+.btn-primary {
+  /* Explicit primary button class */
+  background-color: var(--primary-color);
+  /* Hover background defined directly on hover pseudo-class */
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-dark);
+}
+
+.btn-secondary {
+  background-color: var(--secondary-color);
+}
+
+.btn-secondary:hover {
+  background-color: #5a6268;
+  /* Hardcode darker grey */
+}
+
+.btn-danger {
+  background-color: var(--danger-color);
+}
+
+.btn-danger:hover {
+  background-color: #bb2d3b;
+}
+
+
+/* --- Links --- */
+a {
+  color: var(--primary-color);
+  text-decoration: none;
+  transition: all var(--transition-fast) ease;
+  font-weight: 500;
+}
+
+a:hover {
+  color: var(--primary-dark);
+  text-decoration: underline;
+}
+
+/* --- Messages (Error/Success) --- */
+.error-message,
+.success-message {
+  padding: 1rem;
+  border-radius: var(--border-radius-sm);
+  margin-bottom: var(--spacing-md);
+  font-weight: 600;
+  text-align: center;
+  border: 1px solid transparent;
+  /* Base border for consistency */
+}
+
+.error-message {
+  color: var(--danger-color);
+  background-color: #fcebeb;
+  border-color: var(--danger-color);
+}
+
+.success-message {
+  color: var(--accent-color);
+  background-color: #e9f5ed;
+  border-color: var(--accent-color);
+}
+
+/* --- Utility Classes for Components (Enhanced) --- */
+.flex-row {
+  display: flex;
+  align-items: center;
+}
+
+.flex-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.align-center {
+  align-items: center;
+}
+
+.gap-md {
+  gap: var(--spacing-md);
+}
+
+.text-center {
+  text-align: center;
+}
+
+.mt-md {
+  margin-top: var(--spacing-md);
+}
+
+.mb-md {
+  margin-bottom: var(--spacing-md);
+}
+
+.py-md {
+  padding-top: var(--spacing-md);
+  padding-bottom: var(--spacing-md);
+}
+
+.px-md {
+  padding-left: var(--spacing-md);
+  padding-right: var(--spacing-md);
+}
+
+/* --- Base Card Styling (for components that act as cards) --- */
+.card {
+  background-color: var(--background-card);
+  border: 1px solid var(--border-color-light);
+  border-radius: var(--border-radius-md);
+  padding: var(--spacing-lg);
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-medium);
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+@media (max-width: 768px) {
+  .card {
+    border-radius: 0;
+    /* Cards become full-width on mobile */
+    box-shadow: none;
+  }
+}
+
+
+/* --- Responsive Adjustments (General) --- */
+@media (max-width: 480px) {
+  html {
+    font-size: 15px;
+    /* Slightly smaller base font for very small screens */
+  }
+
+  button {
+    /* Apply to all buttons including those not using specific classes */
+    width: 100%;
+    /* Buttons can take full width on small screens */
+    min-width: unset;
+    align-self: stretch;
+    /* Stretch in flex column */
+  }
+
+  .flex-row {
+    flex-direction: column;
+    /* Stack items vertically on very small screens */
+    align-items: stretch;
+  }
+}
+
+/* --- Animations --- */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease-out forwards;
+}
+/* client/src/index.css (Additions for HomePage) */
+
+/* --- Post Creation Card --- */
+.post-create-card {
+  margin-bottom: var(--spacing-lg);
+  /* More space below the card */
+  padding: var(--spacing-lg);
+  /* Consistent padding */
+  box-shadow: var(--shadow-sm);
+  /* Keep it light */
+}
+
+/* Specific styling for the textarea in the post form */
+.post-create-card textarea {
+  min-height: 100px;
+  margin-bottom: var(--spacing-sm);
+  /* Space below textarea */
+  /* Inherits general input styles, but ensure it's not overriding specific form gap */
+}
+
+/* Ensure the post button aligns correctly */
+.post-create-card form button {
+  align-self: flex-end;
+  /* Align button to the right for "Post" */
+  margin-top: var(--spacing-sm);
+  /* Space above button */
+}
+
+/* --- Posts List --- */
+.posts-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  /* Space between individual post cards */
+  margin-top: var(--spacing-md);
+}
+
+/* Adjustments for text input if needed, though general input styles apply */
+.text-input {
+  /* For general textareas/inputs where specific styling is needed */
+  /* Inherits from input[type="text"] etc. */
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border: 1px solid var(--border-color-light);
+  border-radius: var(--border-radius-sm);
+  font-size: 1rem;
+  color: var(--text-primary);
+  background-color: var(--background-field);
+  transition: all var(--transition-fast);
+}
+
+.text-input:focus {
+  border-color: var(--border-color-focus);
+  box-shadow: 0 0 0 3px rgba(var(--primary-color), 0.25);
+  outline: none;
+  background-color: var(--background-card);
+}
+
+/* Responsive adjustments for HomePage elements */
+@media (max-width: 480px) {
+  .post-create-card form button {
+    align-self: stretch;
+    /* Make button full width on small screens */
+  }
+}
+/* client/src/index.css (Additions for ProfilePage) */
+
+/* --- Profile Header Section --- */
+.profile-header {
+  padding-bottom: var(--spacing-md);
+  border-bottom: 1px solid var(--border-color-light);
+  margin-bottom: var(--spacing-lg);
+  display: flex;
+  flex-direction: column;
+  /* Default to column for mobile */
+  align-items: center;
+  /* Center items in column layout */
+  gap: var(--spacing-md);
+}
+
+@media (min-width: 768px) {
+  .profile-header {
+    flex-direction: row;
+    /* Row layout for desktop */
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: var(--spacing-lg);
+  }
+}
+
+
+@media (min-width: 768px) {
+  .profile-avatar-section {
+    flex-direction: row;
+    /* Avatar and info side-by-side on desktop */
+    text-align: left;
+    align-items: center;
+    gap: var(--spacing-md);
+  }
+}
+
+
+
+
+.profile-info-basic h2 {
+  margin-bottom: var(--spacing-xs);
+  font-size: 1.8rem;
+  /* Consistent heading size */
+}
+
+.profile-email {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  margin-bottom: 0;
+  /* Remove default paragraph margin */
+}
+
+.profile-details {
+  flex-grow: 1;
+  /* Allows details to take available space */
+  text-align: center;
+  /* Default center for mobile */
+}
+
+@media (min-width: 768px) {
+  .profile-details {
+    text-align: left;
+    /* Align details left on desktop */
+  }
+}
+
+.profile-bio {
+  font-size: 1.05rem;
+  line-height: 1.6;
+  margin-bottom: var(--spacing-sm);
+}
+
+.profile-join-date {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin-top: var(--spacing-xs);
+}
+
+.current-user-tag {
+  font-size: 0.9rem;
+  color: var(--primary-dark);
+  font-weight: 600;
+  margin-top: var(--spacing-sm);
+  text-align: center;
+}
+
+/* Loader/empty state text */
+.container.text-center {
+  font-size: 1.2rem;
+  color: var(--text-secondary);
+  padding: var(--spacing-lg);
+}
+
+.posts-list.mt-md {
+  /* Ensure proper margin for posts list after profile details */
+  margin-top: var(--spacing-lg);
+}
